@@ -12,7 +12,6 @@ import java.io.*;
  *
  * @author Pablo Quesada
  */
-
 public class ClienteFTP {
 
     private String servidor;
@@ -29,13 +28,12 @@ public class ClienteFTP {
         this.cliente = new FTPClient();
     }
 
-     /*
+    /*
       Intenta conectar al servidor FTP con los datos proporcionados.
      
       @return true si la conexión y autenticación fueron exitosas, false en caso contrario.
       @throws IOException si ocurre un error durante la conexión.
      */
-    
     public boolean conectar() throws IOException {
         cliente.connect(servidor, puerto);
 
@@ -63,7 +61,6 @@ public class ClienteFTP {
         return true;
     }
 
-    
     /*
       Cierra la sesión y desconecta del servidor FTP si la conexión está activa.
      
@@ -73,6 +70,49 @@ public class ClienteFTP {
         if (cliente.isConnected()) {
             cliente.logout();
             cliente.disconnect();
+        }
+    }
+
+    // Método para subir un archivo al servidor FTP
+    public boolean subirArchivo(String local, String ruta) throws IOException {
+        // Creamos un objeto File
+        File localFile = new File(local);
+        FileInputStream inputStream = new FileInputStream(localFile);
+
+        try {
+            System.out.println("Subiendo archivo: " + local + " a " + ruta);
+            // Intentamos almacenar el archivo en el servidor FTP
+            boolean resultado = cliente.storeFile(ruta, inputStream);
+            if (resultado) {
+                System.out.println("Archivo subido correctamente");
+            } else {
+                System.err.println("Error, no se pudo subir el archivo");
+            }
+            return resultado;
+        } finally {
+            inputStream.close();
+        }
+    }
+
+// Método para descargar un archivo del servidor FTP
+    public boolean descargarArchivo(String rutaRemota, String archivoLocal) throws IOException {
+        // Creamos un objeto File
+        File localFile = new File(archivoLocal);
+        FileOutputStream outputStream = new FileOutputStream(localFile);
+
+        try {
+            System.out.println("Descargando archivo: " + rutaRemota + " a " + archivoLocal);
+            // Intentamos recuperar el archivo desde el servidor FTP
+
+            boolean resultado = cliente.retrieveFile(rutaRemota, outputStream);
+            if (resultado) {
+                System.out.println("Archivo descargado correctamente");
+            } else {
+                System.err.println("Error, no se pudo descargar el archivo");
+            }
+            return resultado;
+        } finally {
+            outputStream.close();
         }
     }
 }
