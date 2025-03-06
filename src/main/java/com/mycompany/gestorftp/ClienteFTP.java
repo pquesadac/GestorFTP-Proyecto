@@ -115,4 +115,29 @@ public class ClienteFTP {
             outputStream.close();
         }
     }
+
+    public boolean eliminarArchivo(String rutaRemota) throws IOException {
+        System.out.println("Eliminando archivo: " + rutaRemota);
+        boolean resultado = cliente.deleteFile(rutaRemota);
+        if (resultado) {
+            System.out.println("Archivo eliminado");
+        } else {
+            System.err.println("Error, no se pudo eliminar el archivo");
+        }
+        return resultado;
+    }
+
+    public boolean comprobacion(String ruta) throws IOException {
+        String[] archivos = cliente.listNames(ruta);
+        return archivos != null && archivos.length > 0;
+    }
+
+    public boolean crearDirectorio(String directorio) throws IOException {
+        return cliente.makeDirectory(directorio);
+    }
+
+    public boolean cambiarDirectorio(String directorio) throws IOException {
+        return cliente.changeWorkingDirectory(directorio);
+    }
+
 }
