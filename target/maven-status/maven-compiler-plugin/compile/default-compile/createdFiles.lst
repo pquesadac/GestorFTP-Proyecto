@@ -1,1 +1,5 @@
+com\mycompany\gestorftp\Cifrador.class
+com\mycompany\gestorftp\MonitorCarpeta$1.class
+com\mycompany\gestorftp\MonitorCarpeta.class
+com\mycompany\gestorftp\ClienteFTP.class
 com\mycompany\gestorftp\GestorFTP.class
