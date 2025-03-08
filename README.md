@@ -28,7 +28,7 @@ El proyecto está compuesto por varias clases Java que trabajan juntas:
 - `MonitorCarpeta.java`: Monitorea los cambios en la carpeta local y gestiona la sincronización
 - `Cifrador.java`: Proporciona funcionalidad de cifrado/descifrado AES
 - `Descifrador.java`: Aplicación independiente para descargar y descifrar archivos desde el servidor FTP
-- `GestorFTP.java`: Clase adicional para operaciones HTTP (no usada directamente en la sincronización)
+- `Subidor.java`: Clasepara subir archivos al servidor FTP
 
 ### Proceso de Sincronización
 
